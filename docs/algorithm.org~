@@ -1,0 +1,10 @@
+* Count occurrences of each lemma
+* Rank sentences
+** Sentence score equals the minumum frequency amongst the lemmas in the sentence
+* Order sentences by score
+* Going from highest-scored sentence to lowest
+** For each word in sentence:
+*** Get lemma and form for each word
+*** If lemma has not been seen, create card for lemma -> definition
+*** If form has not been seen (with lemma) more than X times, create card for word -> form description
+** Add a card for sentence -> understanding

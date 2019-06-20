@@ -6,6 +6,7 @@ import re
 import unicodedata
 
 from config import MORPHGNT_DIR
+import forms
 import strongs
 
 
@@ -48,4 +49,6 @@ def lemma_frequency_ranks():
 
 
 if __name__ == '__main__':
-    print(lemma_frequency_ranks()[:10])
+    for lemma in lemma_frequency_ranks():
+        print(lemma, forms.lemma_forms()[lemma])
+        input()
