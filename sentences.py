@@ -27,6 +27,12 @@ class Sentence:
         self.words = []
         self.verses = set()
 
+    def __eq__(self, other):
+        return hash(self) == hash(other)
+
+    def __hash__(self):
+        return hash(tuple(word.word for word in self.words))
+
     def __str__(self):
         return ' '.join([word.word for word in self.words])
 
@@ -39,7 +45,7 @@ class Sentence:
 
 @lru_cache()
 def gather_sentences():
-    sentences = []
+    sentences = set()
     for book in os.listdir(MORPHGNT_DIR):
         sentence = Sentence()
         with open(os.path.join(MORPHGNT_DIR, book)) as f:
@@ -57,7 +63,7 @@ def gather_sentences():
                 sentence.verses.add(util.book_string(verse))
 
                 if '.' in word or ';' in word:
-                    sentences.append(sentence)
+                    sentences.add(sentence)
                     sentence = Sentence()
 
     return(sentences)
